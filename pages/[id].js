@@ -7,8 +7,9 @@ import { useSession } from "next-auth/client";
 import { useForm } from "react-hook-form";
 import formStyles from "../styles/AddCustomer.module.scss";
 import axios from "axios";
+import Image from "next/image";
 
-const rentDetails = ({ apartments }) => {
+export default function RentDetails({ apartments }) {
   const router = useRouter();
   const [session] = useSession();
   const { id } = router.query;
@@ -16,7 +17,7 @@ const rentDetails = ({ apartments }) => {
 
   useEffect(() => {
     setRentsData(apartments);
-  }, []);
+  }, [apartments]);
 
   return (
     <>
@@ -26,13 +27,19 @@ const rentDetails = ({ apartments }) => {
             <section key={rt._id} className="container">
               <div className="split">
                 <div className={styles.rentDetailsContainer}>
-                  <img className={styles.rentImg1} src={rt.image1} alt="" />
+                  <Image
+                    width={1000}
+                    height={500}
+                    className={styles.rentImg1}
+                    src={rt.image1}
+                    alt=""
+                  />
 
                   <div className={styles.rentImages}>
-                    <img src={rt.image2} alt="" />
-                    <img src={rt.image3} alt="" />
-                    <img src={rt.image4} alt="" />
-                    <img src={rt.image5} alt="" />
+                    <Image width={250} height={250} src={rt.image2} alt="" />
+                    <Image width={250} height={250} src={rt.image3} alt="" />
+                    <Image width={250} height={250} src={rt.image4} alt="" />
+                    <Image width={250} height={250} src={rt.image5} alt="" />
                   </div>
 
                   <span>
@@ -54,9 +61,7 @@ const rentDetails = ({ apartments }) => {
       )}
     </>
   );
-};
-
-export default rentDetails;
+}
 
 export async function getStaticProps() {
   const res = await fetch(`${server}/api/rents`);

@@ -24,10 +24,10 @@ const Nav = () => {
         {session ? (
           <>
             <li>
-              <a href="/profile">Orders</a>
+              <Link href="/profile">Orders</Link>
             </li>
             <li>
-              <a href="/dashboard">Dashboard</a>
+              <Link href="/dashboard">Dashboard</Link>
             </li>
 
             <button onClick={signOut}>Signout</button>

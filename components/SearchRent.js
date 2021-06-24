@@ -11,9 +11,7 @@ const SearchRent = () => {
   console.log(rentsData);
 
   const getRentsData = async () => {
-    const res = await axios.get(
-      `https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/apartment-hunt-ogagn/service/apartment-service/incoming_webhook/searchRents?search=${search}`
-    );
+    const res = await axios.get(`${server}?search=${search}`);
     setRentsData(res);
   };
 

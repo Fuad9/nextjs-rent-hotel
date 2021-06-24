@@ -9,7 +9,7 @@ const RentList = ({ apartments }) => {
 
   useEffect(() => {
     setRentsData(apartments);
-  }, []);
+  }, [apartments]);
 
   return (
     <>
@@ -23,7 +23,7 @@ const RentList = ({ apartments }) => {
             {rentsData?.map((rt) => (
               <div className={`col-md-4 ${rentListStyles.rents}`} key={rt._id}>
                 <div>
-                  <img src={rt.image1} alt="" />
+                  <Image src={rt.image1} alt="" />
                 </div>
 
                 <div>
