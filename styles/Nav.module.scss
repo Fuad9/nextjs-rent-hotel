@@ -1,0 +1,42 @@
+.nav {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-weight: 500;
+  font-size: 1.5rem;
+  border-bottom: 2px solid green;
+
+  button {
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
+
+  > ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+
+    > li > a {
+      padding-right: 1.5rem;
+      --border-color: green;
+      --border-width: 5px;
+      --bottom-distance: 0px; /* you can increase this */
+
+      display: inline-block;
+      background-image: linear-gradient(
+        var(--border-color),
+        var(--border-color)
+      );
+      background-size: 0% var(--border-width);
+      background-repeat: no-repeat;
+      background-position: 0% calc(100% - var(--bottom-distance));
+      transition: background-size 0.3s;
+      margin: 5px 0;
+
+      &:hover {
+        background-size: 70% var(--border-width);
+      }
+    }
+  }
+}

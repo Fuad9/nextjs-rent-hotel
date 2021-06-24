@@ -1,0 +1,32 @@
+.profile {
+  text-align: center;
+
+  > table {
+    > thead {
+      padding: 1rem;
+      border: 1px solid green;
+      border-radius: 10px;
+      font-weight: bold;
+      background: lightgray;
+    }
+
+    > tbody > tr {
+      vertical-align: center;
+
+      > td {
+        > select {
+          cursor: pointer;
+
+          &:hover {
+            border: 1px solid green;
+            background: transparent;
+          }
+        }
+
+        > button {
+          padding: 0.5rem 1rem;
+        }
+      }
+    }
+  }
+}

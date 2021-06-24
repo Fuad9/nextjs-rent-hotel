@@ -1,0 +1,39 @@
+.rents {
+  margin: 1rem 0;
+  cursor: pointer;
+
+  &:hover {
+    > div:nth-child(1) {
+      overflow: hidden;
+
+      img {
+        opacity: 0.7;
+        transform: scale(1.1);
+        transition: all 1s;
+      }
+    }
+  }
+
+  > div:nth-child(1) {
+    img {
+      display: block;
+      max-width: 100%;
+    }
+  }
+
+  > div:nth-child(2) {
+    border: 1px solid green;
+    border-radius: 0 0 1rem 1rem;
+    padding: 1rem;
+
+    h5 {
+      color: #5a3b27;
+    }
+
+    span {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}

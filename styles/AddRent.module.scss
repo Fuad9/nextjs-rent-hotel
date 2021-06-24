@@ -1,0 +1,33 @@
+.addRent {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  > div {
+    margin: 2rem 0;
+    padding: 1rem 5rem;
+    border: 1px solid green;
+    border-radius: 1rem;
+
+    > form > div {
+      display: flex;
+      flex-direction: row;
+
+      input {
+        margin: 1rem;
+        padding: 1rem;
+        width: 20.6875rem;
+        background: #9febcd;
+        border: 2px solid transparent;
+        outline: none !important;
+        border-radius: 0.3125rem;
+        color: orangered;
+
+        &:hover {
+          border: 2px solid green;
+          background: transparent;
+        }
+      }
+    }
+  }
+}

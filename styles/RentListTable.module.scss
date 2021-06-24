@@ -1,0 +1,25 @@
+.rentListTable {
+  h1 {
+    text-align: center;
+  }
+
+  > table {
+    text-align: center;
+
+    > thead {
+      padding: 1rem;
+      border: 1px solid green;
+      border-radius: 10px;
+      font-weight: bold;
+      background: lightgray;
+    }
+
+    > tbody > tr {
+      vertical-align: center;
+
+      > td > button {
+        padding: 0.5rem 1rem;
+      }
+    }
+  }
+}

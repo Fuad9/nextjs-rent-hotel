@@ -1,0 +1,29 @@
+.rentDetailsContainer {
+  .rentImg1 {
+    width: 48.125rem;
+    height: 23.5rem;
+  }
+
+  .rentImages {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+
+    img {
+      width: 10.625rem;
+      height: 6.9375rem;
+    }
+  }
+
+  span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h4 {
+    color: #747474;
+  }
+}
+
+

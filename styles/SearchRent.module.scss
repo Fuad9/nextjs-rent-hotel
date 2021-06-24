@@ -1,0 +1,35 @@
+.searchContainer {
+  padding: 8rem 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../public/images/Rectangle\ 13.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  h1 {
+    text-transform: uppercase;
+    font-family: "Fira Mono", monospace, sans-serif;
+  }
+
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    input {
+      width: 33.5rem;
+      height: 3.125rem;
+      padding-left: 1rem;
+      background: #f1f6f4;
+      border: 2px solid transparent;
+      outline: none !important;
+      border-radius: 0.3125rem;
+
+      &:hover {
+        background: transparent;
+        border: 2px solid green;
+        color: #fff;
+      }
+    }
+  }
+}
