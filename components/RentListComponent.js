@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useContext } from "react";
 import Image from "next/image";
 import rentListStyles from "../styles/RentList.module.scss";
@@ -21,7 +20,7 @@ const RentListComponent = ({ rentsData }) => {
             rentsData?.map((rt) => (
               <div className={`col-md-4 ${rentListStyles.rents}`} key={rt._id}>
                 <div>
-                  <img src={rt.image1} alt="" />
+                  <Image src={rt.image1} width={500} height={350} alt="" />
                 </div>
 
                 <div>

@@ -77,6 +77,15 @@ const AddRent = ({ adminsData, session }) => {
               // {...register("image1", { required: true })}
             />
           </div>
+          <textarea type="text" {...register("about", { required: true })} />
+          <textarea
+            type="text"
+            {...register("priceDetails", { required: true })}
+          />
+          <textarea
+            type="text"
+            {...register("propertyDetails", { required: true })}
+          />
 
           <button type="submit">Add Apartment</button>
         </form>

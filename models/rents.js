@@ -36,6 +36,18 @@ const RentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  about: {
+    type: String,
+    required: true,
+  },
+  priceDetails: {
+    type: String,
+    required: true,
+  },
+  propertyDetails: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.models.hotels || mongoose.model("hotels", RentSchema);
