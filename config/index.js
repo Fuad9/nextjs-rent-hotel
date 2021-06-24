@@ -1,5 +1,3 @@
-const dev = process.env.NODE_ENV !== "production";
+const dev = process.env.NODE_ENV === "production";
 
-export const server = dev
-  ? "http://localhost:3000"
-  : "https://nextjs-rent-hotel.vercel.app";
+export const server = "https://nextjs-rent-hotel.vercel.app";
