@@ -39,17 +39,27 @@ const RentList = ({ apartments }) => {
                   </h5>
                   <span>
                     <h5>
-                      <Image width={17} height={17} src="/images/bed 1.png" />{" "}
+                      <Image
+                        width={17}
+                        height={17}
+                        src="/images/bed 1.png"
+                        alt=""
+                      />{" "}
                       {rt.bedroom} Bedrooms
                     </h5>
                     <h5>
-                      <Image width={17} height={17} src="/images/bath 1.png" />{" "}
+                      <Image
+                        width={17}
+                        height={17}
+                        src="/images/bath 1.png"
+                        alt=""
+                      />{" "}
                       {rt.bathroom} Bathrooms
                     </h5>
                   </span>
                   <span>
                     <h2>${rt.price}</h2>
-                    <Link href={`${rt._id}`}>
+                    <Link href={`${rt._id}`} passHref>
                       <button>View Details</button>
                     </Link>
                   </span>
@@ -66,7 +76,15 @@ const RentList = ({ apartments }) => {
 export default RentList;
 
 export async function getStaticProps() {
-  const res = await fetch(`${server}/api/rents`);
+  const res = await fetch(`${server}/api/rents`, {
+    method: "GET",
+    headers: {
+      // update with your user-agent
+      "User-Agent":
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
+      Accept: "application/json; charset=UTF-8",
+    },
+  });
   const apartments = await res.json();
 
   if (!apartments) {

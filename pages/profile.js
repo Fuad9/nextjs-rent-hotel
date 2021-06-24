@@ -17,7 +17,7 @@ export default function Profile({ customers, admins, apartments }) {
     setCustomersData(customers);
     setAdminsData(admins);
     setRentsData(apartments);
-  }, []);
+  }, [customers, admins, apartments]);
 
   return (
     <>
@@ -84,7 +84,15 @@ export async function getStaticProps() {
   const resTwo = await fetch(`${server}/api/admins`);
   const admins = await resTwo.json();
 
-  const resThree = await fetch(`${server}/api/rents`);
+  const resThree = await fetch(`${server}/api/rents`, {
+    method: "GET",
+    headers: {
+      // update with your user-agent
+      "User-Agent":
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
+      Accept: "application/json; charset=UTF-8",
+    },
+  });
   const apartments = await resThree.json();
 
   if (!customers || !admins || !apartments) {
