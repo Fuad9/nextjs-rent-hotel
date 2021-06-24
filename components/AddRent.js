@@ -9,7 +9,7 @@ const AddRent = ({ adminsData, session }) => {
 
   const onSubmit = handleSubmit(async (formData) => {
     try {
-      const res = await axios.post(`/api/rents`, formData, {
+      const res = await axios.post(`${server}/api/rents`, formData, {
         headers: { "Content-Type": "application/json" },
       });
 

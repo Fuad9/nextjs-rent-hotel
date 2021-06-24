@@ -12,7 +12,7 @@ const AddCustomer = ({ rt, session }) => {
   const onSubmit = handleSubmit(async (formData) => {
     console.log(formData);
     try {
-      const res = await axios.post(`/api/customers`, formData, {
+      const res = await axios.post(`${server}/api/customers`, formData, {
         headers: { "Content-Type": "application/json" },
       });
 
