@@ -3,14 +3,9 @@ import Image from "next/image";
 import rentListStyles from "../styles/RentList.module.scss";
 import Link from "next/link";
 import { server } from "../config";
+import { connectToDatabase } from "../utils/mongodb";
 
-const RentList = ({ apartments }) => {
-  const [rentsData, setRentsData] = useState([]);
-
-  useEffect(() => {
-    setRentsData(apartments);
-  }, [apartments]);
-
+const RentList = ({ rentsData }) => {
   return (
     <>
       <section className="container">
@@ -23,7 +18,7 @@ const RentList = ({ apartments }) => {
             {rentsData?.map((rt) => (
               <div className={`col-md-4 ${rentListStyles.rents}`} key={rt._id}>
                 <div>
-                  <Image src={rt.image1} alt="" />
+                  <Image src={rt.image1} width={500} height={500} alt="" />
                 </div>
 
                 <div>
@@ -76,22 +71,13 @@ const RentList = ({ apartments }) => {
 export default RentList;
 
 export async function getStaticProps() {
-  const res = await fetch(`${server}/api/rents`, {
-    method: "GET",
-    headers: {
-      // update with your user-agent
-      "User-Agent":
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
-      Accept: "application/json; charset=UTF-8",
+  const { db } = await connectToDatabase();
+
+  const rentsData = await db.collection("hotels").find({}).toArray();
+
+  return {
+    props: {
+      rentsData: JSON.parse(JSON.stringify(rentsData)),
     },
-  });
-  const apartments = await res.json();
-
-  if (!apartments) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return { props: { apartments } };
+  };
 }

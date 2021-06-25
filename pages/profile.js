@@ -6,18 +6,19 @@ import ProfileStyles from "../styles/Profile.module.scss";
 import Nav from "../components/Nav";
 import { useSession } from "next-auth/client";
 import { server } from "../config";
+import { connectToDatabase } from "../utils/mongodb";
 
-export default function Profile({ customers, admins, apartments }) {
+export default function Profile({ customersData, adminsData, rentsData }) {
   const [session, loading] = useSession();
-  const [customersData, setCustomersData] = useState([]);
-  const [adminsData, setAdminsData] = useState([]);
-  const [rentsData, setRentsData] = useState([]);
+  // const [customersData, setCustomersData] = useState([]);
+  // const [adminsData, setAdminsData] = useState([]);
+  // const [rentsData, setRentsData] = useState([]);
 
-  useEffect(() => {
-    setCustomersData(customers);
-    setAdminsData(admins);
-    setRentsData(apartments);
-  }, [customers, admins, apartments]);
+  // useEffect(() => {
+  //   setCustomersData(customers);
+  //   setAdminsData(admins);
+  //   setRentsData(apartments);
+  // }, [customers, admins, apartments]);
 
   return (
     <>
@@ -56,20 +57,20 @@ export default function Profile({ customers, admins, apartments }) {
                 <ProfileItem
                   key={customerData._id}
                   customerData={customerData}
-                  adminsData={adminsData}
                   session={session}
+                  adminsData={adminsData}
                 />
               ))}
             </tbody>
           </table>
         </div>
 
-        <AddRent adminsData={adminsData} session={session} />
+        <AddRent session={session} adminsData={adminsData} />
 
         <RentListTable
+          session={session}
           rentsData={rentsData}
           adminsData={adminsData}
-          session={session}
         />
       </section>
     </>
@@ -77,29 +78,17 @@ export default function Profile({ customers, admins, apartments }) {
 }
 
 export async function getStaticProps() {
-  console.log(server);
-  const resOne = await fetch(`${server}/api/customers`);
-  const customers = await resOne.json();
+  const { db } = await connectToDatabase();
 
-  const resTwo = await fetch(`${server}/api/admins`);
-  const admins = await resTwo.json();
+  const rentsData = await db.collection("hotels").find({}).toArray();
+  const customersData = await db.collection("rents").find({}).toArray();
+  const adminsData = await db.collection("admins").find({}).toArray();
 
-  const resThree = await fetch(`${server}/api/rents`, {
-    method: "GET",
-    headers: {
-      // update with your user-agent
-      "User-Agent":
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
-      Accept: "application/json; charset=UTF-8",
+  return {
+    props: {
+      rentsData: JSON.parse(JSON.stringify(rentsData)),
+      customersData: JSON.parse(JSON.stringify(customersData)),
+      adminsData: JSON.parse(JSON.stringify(adminsData)),
     },
-  });
-  const apartments = await resThree.json();
-
-  if (!customers || !admins || !apartments) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return { props: { customers, admins, apartments } };
+  };
 }

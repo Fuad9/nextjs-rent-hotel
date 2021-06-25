@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import rentListStyles from "../styles/RentList.module.scss";
 import Link from "next/link";
-import { RentsContext } from "../pages/_app";
+import { server } from "../config";
 
 const RentListComponent = ({ rentsData }) => {
-  // const [rentsData] = useContext(RentsContext);
   console.log(rentsData);
 
   return (

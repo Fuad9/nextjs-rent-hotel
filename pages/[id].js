@@ -8,16 +8,12 @@ import { useForm } from "react-hook-form";
 import formStyles from "../styles/AddCustomer.module.scss";
 import axios from "axios";
 import Image from "next/image";
+import { connectToDatabase } from "../utils/mongodb";
 
-export default function RentDetails({ apartments }) {
+export default function RentDetails({ rentsData }) {
   const router = useRouter();
   const [session] = useSession();
   const { id } = router.query;
-  const [rentsData, setRentsData] = useState([]);
-
-  useEffect(() => {
-    setRentsData(apartments);
-  }, [apartments]);
 
   return (
     <>
@@ -63,41 +59,47 @@ export default function RentDetails({ apartments }) {
   );
 }
 
+// export async function getStaticProps() {
+//   const res = await fetch(`${server}/api/rents`, {
+//     method: "GET",
+//     headers: {
+//       // update with your user-agent
+//       "User-Agent":
+//         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
+//       Accept: "application/json; charset=UTF-8",
+//     },
+//   });
+//   const apartments = await res.json();
+
+//   if (!apartments) {
+//     return {
+//       notFound: true,
+//     };
+//   }
+
+//   return { props: { apartments } };
+// }
+
+// direct query database inside getStaticProps
 export async function getStaticProps() {
-  const res = await fetch(`${server}/api/rents`, {
-    method: "GET",
-    headers: {
-      // update with your user-agent
-      "User-Agent":
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
-      Accept: "application/json; charset=UTF-8",
+  const { db } = await connectToDatabase();
+
+  const rentsData = await db.collection("hotels").find({}).toArray();
+
+  return {
+    props: {
+      rentsData: JSON.parse(JSON.stringify(rentsData)),
     },
-  });
-  const apartments = await res.json();
-
-  if (!apartments) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return { props: { apartments } };
+  };
 }
 
 /* getStaticPaths is required for dynamic SSG pages ===================================== */
 export const getStaticPaths = async () => {
-  const res = await fetch(`${server}/api/rents`, {
-    method: "GET",
-    headers: {
-      // update with your user-agent
-      "User-Agent":
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
-      Accept: "application/json; charset=UTF-8",
-    },
-  });
-  const apartments = await res.json();
+  const { db } = await connectToDatabase();
 
-  const ids = apartments.map((apartment) => apartment._id);
+  const rentsData = await db.collection("hotels").find({}).toArray();
+
+  const ids = rentsData.map((rentData) => rentData._id);
   const paths = ids.map((id) => ({ params: { id: id.toString() } }));
 
   return {

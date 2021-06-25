@@ -6,6 +6,7 @@ import { Form, Modal } from "react-bootstrap";
 import { server } from "../config";
 
 export default function ProfileItem({ customerData, adminsData, session }) {
+  console.log(customerData);
   const { _id, status } = customerData;
   const { name, phone, email, rentname, comments } = customerData.customer;
   const [show, setShow] = useState(false);

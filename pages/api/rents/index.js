@@ -11,7 +11,7 @@ export default async (req, res) => {
     case "GET":
       try {
         const rents = await Rents.find({});
-        console.log(rents);
+        // console.log(rents);
 
         res.status(200).json(rents);
       } catch (error) {
