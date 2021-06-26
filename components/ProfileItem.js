@@ -6,9 +6,8 @@ import { Form, Modal } from "react-bootstrap";
 import { server } from "../config";
 
 export default function ProfileItem({ customerData, adminsData, session }) {
-  console.log(customerData);
-  const { _id, status } = customerData;
-  const { name, phone, email, rentname, comments } = customerData.customer;
+  const { _id, name, phone, email, rentname, comments, status } = customerData;
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -17,13 +16,11 @@ export default function ProfileItem({ customerData, adminsData, session }) {
   /* delete customer order ========================*/
   const deleteAccount = async () => {
     try {
-      const res = await axios.delete(
-        `${process.env.BASE_URL}/deleteCustomer?id=${_id}`
-      );
+      const res = await axios.delete(`${server}/api/customers?id=${_id}`);
 
       if (res.status === 200) {
         setShow(false);
-        alert("Order Deleted Successfully"); //toast will be added here
+        alert("Order Deleted Successfully");
         window.location.href = "/";
       }
     } catch (err) {
@@ -34,7 +31,7 @@ export default function ProfileItem({ customerData, adminsData, session }) {
   /* update customer order status(pending, done, ongoing)================================= */
   const handleStatus = async (e) => {
     try {
-      await fetch(`${process.env.BASE_URL}/statusUpdate`, {
+      await fetch(`${server}/api/customers`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from "react";
 import ProfileItem from "../components/ProfileItem";
 import AddRent from "../components/AddRent";
 import RentListTable from "../components/RentListTable";
 import ProfileStyles from "../styles/Profile.module.scss";
 import Nav from "../components/Nav";
 import { useSession } from "next-auth/client";
-import { server } from "../config";
 import { connectToDatabase } from "../utils/mongodb";
 
 export default function Profile({ customersData, adminsData, rentsData }) {
   const [session, loading] = useSession();
-  // const [customersData, setCustomersData] = useState([]);
-  // const [adminsData, setAdminsData] = useState([]);
-  // const [rentsData, setRentsData] = useState([]);
-
-  // useEffect(() => {
-  //   setCustomersData(customers);
-  //   setAdminsData(admins);
-  //   setRentsData(apartments);
-  // }, [customers, admins, apartments]);
 
   return (
     <>
@@ -81,7 +70,7 @@ export async function getStaticProps() {
   const { db } = await connectToDatabase();
 
   const rentsData = await db.collection("hotels").find({}).toArray();
-  const customersData = await db.collection("rents").find({}).toArray();
+  const customersData = await db.collection("customers").find({}).toArray();
   const adminsData = await db.collection("admins").find({}).toArray();
 
   return {

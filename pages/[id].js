@@ -50,7 +50,7 @@ export default function RentDetails({ rentsData }) {
                   <h4>{rt.propertyDetails}</h4>
                 </div>
 
-                <AddCustomer rt={rt} />
+                <AddCustomer rt={rt} session={session} />
               </div>
             </section>
           )

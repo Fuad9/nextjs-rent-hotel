@@ -7,6 +7,6 @@ module.exports = {
     MONGODB_DB: `${process.env.MONGODB_DB}`,
   },
   images: {
-    domains: ["i.ibb.co"],
+    domains: ["i.ibb.co", "lh3.googleusercontent.com"],
   },
 };
