@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import rentListStyles from "../styles/RentList.module.scss";
 import Link from "next/link";
-import { server } from "../config";
 import { connectToDatabase } from "../utils/mongodb";
+import Nav from "../components/Nav";
 
 const RentList = ({ rentsData }) => {
   return (
     <>
+      <Nav />
       <section className="container">
         <h4 className="text-center">House Rent</h4>
         <h3 className="text-center">
@@ -18,7 +18,7 @@ const RentList = ({ rentsData }) => {
             {rentsData?.map((rt) => (
               <div className={`col-md-4 ${rentListStyles.rents}`} key={rt._id}>
                 <div>
-                  <Image src={rt.image1} width={500} height={500} alt="" />
+                  <Image src={rt.image1} width={500} height={350} alt="" />
                 </div>
 
                 <div>

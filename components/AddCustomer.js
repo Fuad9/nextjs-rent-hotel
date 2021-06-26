@@ -31,35 +31,37 @@ const AddCustomer = ({ rt, session }) => {
   });
 
   return (
-    <form className={styles.userProfile} onSubmit={onSubmit}>
-      <input
-        type="text"
-        placeholder="Full Name"
-        {...register("name", { required: true })}
-      />
-      <input
-        type="text"
-        placeholder="Phone No"
-        {...register("phone", { required: true })}
-      />
-      <input
-        type="text"
-        placeholder="Email Address"
-        {...register("email", { required: true })}
-      />
-      <input
-        type="text"
-        defaultValue={rt.name}
-        {...register("rentname", { required: true })}
-      />
-      <textarea
-        type="text"
-        placeholder="Message"
-        {...register("comments", { required: true })}
-      />
+    <div className={styles.userProfile}>
+      <form onSubmit={onSubmit}>
+        <input
+          type="text"
+          placeholder="Full Name"
+          {...register("name", { required: true })}
+        />
+        <input
+          type="text"
+          placeholder="Phone No"
+          {...register("phone", { required: true })}
+        />
+        <input
+          type="text"
+          placeholder="Email Address"
+          {...register("email", { required: true })}
+        />
+        <input
+          type="text"
+          defaultValue={rt.name}
+          {...register("rentname", { required: true })}
+        />
+        <textarea
+          type="text"
+          placeholder="Message"
+          {...register("comments", { required: true })}
+        />
 
-      <button type="submit">Request Booking</button>
-    </form>
+        <button type="submit">Request Booking</button>
+      </form>
+    </div>
   );
 };
 

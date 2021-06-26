@@ -1,7 +1,17 @@
 .rentDetailsContainer {
-  .rentImg1 {
-    width: 48.125rem;
-    height: 23.5rem;
+  display: flex;
+  flex-direction: row;
+
+  > div:nth-child(1) {
+    flex: 2;
+  }
+
+  > div:nth-child(2) {
+    flex: 1;
+  }
+
+  @media screen and(max-width: 46em) {
+    flex-direction: column;
   }
 
   .rentImages {
@@ -10,8 +20,7 @@
     margin: 1rem 0;
 
     img {
-      width: 10.625rem;
-      height: 6.9375rem;
+      padding: 0 1rem;
     }
   }
 
@@ -25,5 +34,3 @@
     color: #747474;
   }
 }
-
-

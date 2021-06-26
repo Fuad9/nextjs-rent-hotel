@@ -1,11 +1,8 @@
-import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "../styles/RentDetails.module.scss";
 import { server } from "../config/index";
 import AddCustomer from "../components/AddCustomer";
 import { useSession } from "next-auth/client";
-import { useForm } from "react-hook-form";
-import formStyles from "../styles/AddCustomer.module.scss";
 import axios from "axios";
 import Image from "next/image";
 import { connectToDatabase } from "../utils/mongodb";
@@ -23,34 +20,30 @@ export default function RentDetails({ rentsData }) {
             <section key={rt._id} className="container">
               <div className="split">
                 <div className={styles.rentDetailsContainer}>
-                  <Image
-                    width={1000}
-                    height={500}
-                    className={styles.rentImg1}
-                    src={rt.image1}
-                    alt=""
-                  />
+                  <div>
+                    <Image width={1000} height={500} src={rt.image1} alt="" />
 
-                  <div className={styles.rentImages}>
-                    <Image width={250} height={250} src={rt.image2} alt="" />
-                    <Image width={250} height={250} src={rt.image3} alt="" />
-                    <Image width={250} height={250} src={rt.image4} alt="" />
-                    <Image width={250} height={250} src={rt.image5} alt="" />
+                    <div className={styles.rentImages}>
+                      <Image width={250} height={250} src={rt.image2} alt="" />
+                      <Image width={250} height={250} src={rt.image3} alt="" />
+                      <Image width={250} height={250} src={rt.image4} alt="" />
+                      <Image width={250} height={250} src={rt.image5} alt="" />
+                    </div>
+
+                    <span>
+                      <h2>{rt.name}</h2>
+                      <h2>${rt.price}</h2>
+                    </span>
+
+                    <h3>Price Details-</h3>
+                    <h4>{rt.priceDetails}</h4>
+
+                    <h3>Property Details-</h3>
+                    <h4>{rt.propertyDetails}</h4>
                   </div>
 
-                  <span>
-                    <h2>{rt.name}</h2>
-                    <h2>${rt.price}</h2>
-                  </span>
-
-                  <h3>Price Details-</h3>
-                  <h4>{rt.priceDetails}</h4>
-
-                  <h3>Property Details-</h3>
-                  <h4>{rt.propertyDetails}</h4>
+                  <AddCustomer rt={rt} session={session} />
                 </div>
-
-                <AddCustomer rt={rt} session={session} />
               </div>
             </section>
           )
