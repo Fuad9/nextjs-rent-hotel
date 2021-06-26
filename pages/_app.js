@@ -2,11 +2,14 @@ import Head from "next/head";
 import { createContext, useState } from "react";
 import "../styles/globals.scss";
 import { Provider } from "next-auth/client";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Hydrate } from "react-query/hydration";
 
 export const RentsContext = createContext();
 
 function MyApp({ Component, pageProps }) {
   const [rentsData, setRentsData] = useState([]);
+  const [queryClient] = useState(() => new QueryClient());
 
   return (
     <>
@@ -22,11 +25,15 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
 
-      <Provider session={pageProps.session}>
-        <RentsContext.Provider value={[rentsData, setRentsData]}>
-          <Component {...pageProps} />
-        </RentsContext.Provider>
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <Provider session={pageProps.session}>
+            <RentsContext.Provider value={[rentsData, setRentsData]}>
+              <Component {...pageProps} />
+            </RentsContext.Provider>
+          </Provider>
+        </Hydrate>
+      </QueryClientProvider>
     </>
   );
 }

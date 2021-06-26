@@ -5,9 +5,26 @@ import ProfileStyles from "../styles/Profile.module.scss";
 import Nav from "../components/Nav";
 import { useSession } from "next-auth/client";
 import { connectToDatabase } from "../utils/mongodb";
+import axios from "axios";
+import { server } from "../config/index";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import useSWR from "swr";
+
+const fetcher = async () => {
+  const res = await axios.get(`${server}/api/customers`);
+  return res.data;
+};
 
 export default function Profile({ customersData, adminsData, rentsData }) {
-  const [session, loading] = useSession();
+  const [session] = useSession();
+  const initialData = customersData;
+
+  const { data, error } = useSWR("customers", fetcher, {
+    initialData,
+  });
+
+  if (!data) return <LinearProgress />;
+  if (error) return <div>Something went wrong ...</div>;
 
   return (
     <>
@@ -42,7 +59,7 @@ export default function Profile({ customersData, adminsData, rentsData }) {
               </tr>
             </thead>
             <tbody>
-              {customersData?.map((customerData) => (
+              {data?.map((customerData) => (
                 <ProfileItem
                   key={customerData._id}
                   customerData={customerData}
@@ -66,7 +83,7 @@ export default function Profile({ customersData, adminsData, rentsData }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { db } = await connectToDatabase();
 
   const rentsData = await db.collection("hotels").find({}).toArray();

@@ -5,8 +5,6 @@ import Link from "next/link";
 import { server } from "../config";
 
 const RentListComponent = ({ rentsData }) => {
-  console.log(rentsData);
-
   return (
     <section className="container">
       <h4 className="text-center">House Rent</h4>

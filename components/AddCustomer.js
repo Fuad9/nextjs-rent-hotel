@@ -15,7 +15,7 @@ const AddCustomer = ({ rt, session }) => {
       });
 
       if (res.status === 200) {
-        alert("Data sent successfully"); //toast will be added here
+        alert("Data sent successfully");
         setTimeout(() => {
           session
             ? (window.location.href = "/profile")
