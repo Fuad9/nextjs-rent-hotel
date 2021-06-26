@@ -1,9 +1,11 @@
 import serviceList from "../styles/Service.module.scss";
 import Image from "next/image";
+import Nav from "./Nav";
 
-export default function Services() {
+export default function ServicesComponent() {
   return (
     <>
+      <Nav />
       <section className={`container ${serviceList.serviceContainer}`}>
         <h4>Service</h4>
         <h3>

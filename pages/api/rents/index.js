@@ -45,8 +45,16 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const getRentsData = await db.collection("hotels").find({}).toArray();
-        res.status(200).json(getRentsData);
+        const search = req.query.search;
+
+        const getSearchedRentsData = await db
+          .collection("hotels")
+          .find({
+            location: { $regex: search, $options: "i" },
+          })
+          .toArray();
+
+        res.status(200).json(getSearchedRentsData);
       } catch (err) {
         console.log(err);
         res.status(400).json({ success: false });

@@ -24,7 +24,7 @@ export default function RentDetails({ rentsData }) {
                     <Image width={1000} height={500} src={rt.image1} alt="" />
 
                     <div className={styles.rentImages}>
-                      <Image width={250} height={250} src={rt.image2} alt="" />
+                      <Image width={200} height={200} src={rt.image2} alt="" />
                       <Image width={250} height={250} src={rt.image3} alt="" />
                       <Image width={250} height={250} src={rt.image4} alt="" />
                       <Image width={250} height={250} src={rt.image5} alt="" />

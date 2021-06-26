@@ -2,7 +2,6 @@ import { useEffect, useContext, useState } from "react";
 import Footer from "./footer";
 import Nav from "../components/Nav";
 import RentListComponent from "../components/RentListComponent";
-import SearchRent from "../components/SearchRent";
 import Services from "./services";
 import { RentsContext } from "./_app";
 import { server } from "../config/index";
@@ -15,7 +14,6 @@ export default function Home({ rentsData }) {
   return (
     <>
       <Nav />
-      {/* <SearchRent /> */}
 
       <RentListComponent rentsData={rentsData} />
 
@@ -38,7 +36,7 @@ export default function Home({ rentsData }) {
 //   return { props: { rentsData } };
 // }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { db } = await connectToDatabase();
 
   const rentsData = await db.collection("hotels").find({}).toArray();
