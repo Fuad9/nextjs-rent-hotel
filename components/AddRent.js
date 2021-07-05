@@ -13,8 +13,6 @@ const AddRent = ({ adminsData, session }) => {
         headers: { "Content-Type": "application/json" },
       });
 
-      console.log(res);
-
       if (res.status === 200) {
         alert("Data sent successfully"); //toast will be added here
         window.location.reload();
@@ -77,15 +75,20 @@ const AddRent = ({ adminsData, session }) => {
               // {...register("image1", { required: true })}
             />
           </div>
-          <textarea type="text" {...register("about", { required: true })} />
-          <textarea
-            type="text"
-            {...register("priceDetails", { required: true })}
-          />
-          <textarea
-            type="text"
-            {...register("propertyDetails", { required: true })}
-          />
+
+          <div>
+            <textarea
+              placeholder="price details"
+              type="text"
+              {...register("priceDetails", { required: true })}
+            />
+
+            <textarea
+              placeholder="property details"
+              type="text"
+              {...register("propertyDetails", { required: true })}
+            />
+          </div>
 
           <button type="submit">Add Apartment</button>
         </form>
