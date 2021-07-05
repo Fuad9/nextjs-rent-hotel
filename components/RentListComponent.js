@@ -5,6 +5,7 @@ import Link from "next/link";
 import { server } from "../config/index";
 import searchRentStyles from "../styles/SearchRent.module.scss";
 import axios from "axios";
+import ReactTyped from "react-typed";
 
 const RentListComponent = ({ rentsData }) => {
   const [searchedRentsData, setSearchedRentsData] = useState(rentsData);
@@ -22,7 +23,9 @@ const RentListComponent = ({ rentsData }) => {
   return (
     <section className="container">
       <div className={`container ${searchRentStyles.searchContainer}`}>
-        <h1 className="text-center">find your house rent</h1>
+        <div className="text-center">
+          <ReactTyped strings={["find your house rent"]} typeSpeed={120} />
+        </div>
         <div>
           <input
             type="text"
